@@ -1,46 +1,56 @@
+
+int screen_width; 
+int screen_height; 
+
+Environment environment; 
+Mycelium m1;
+Fruit f1; 
+
+ArrayList<Fruit> fruits; 
+
 void setup() {
   
-  Environment enviroment = new Environment(800, 500);   
-  size(enviroment.screen_width, enviroment.screen_height); 
-
-  // Create a new Mycelium Object from random 
-  Dna dna1 = new Dna(); 
-  Mycelium myco1 = new Mycelium(dna1); 
+  screen_width = 1000; 
+  screen_height = 1000; 
   
-  // Create a new Mycelum Object and SET its DNA 
-  Dna dna2 = new Dna( 0.765454, 0.232213, 0.234332, 0.937482, 0.127258); 
-  Mycelium myco2 = new Mycelium(dna2); 
+  size(1000, 1000); 
   
+  environment = new Environment(screen_width, screen_height); 
   
-  // Example Mycelium
-  ArrayList<Mycelium> mycelia = new ArrayList<Mycelium>();
+  // print_2D_array(enviroment.get_ground_grid());   
+  m1= new Mycelium(new Dna(), width/2, environment.get_ground_level()  ); 
+  m1.set_initial_position(environment,width/2 -1 , environment.get_ground_level()/2 -1 ); 
   
-  for (int i = 0; i < 10; i++) {
-    mycelia.add(new Mycelium(new Dna())); 
+  fruits = new ArrayList<Fruit>(); 
+  
+  for(int i = 0; i < 5; i++) {
+    fruits.add( new Fruit(new Dna(), int(random(0, screen_width)), screen_height/2));
   }
   
-  
-  
- /**
-   * Mycelium Loop Germinate Spores 
-   *  - Checks if spores are ready to germinate, 
-   *  - If they are, advance into Mycelium state
-   *  - Don't forget to pass the DNA 
-  **/ 
-  for (int i = 0; i < mycelia.size(); i++) {
-    
-    // if Mi.is_ready() == true
-     // if Mi.is_female() == true 
-        
-      
-  }  
   
   
 }
 
 void draw(){
-
-
+  background(100, 100, 100);
+  m1.add_cell(environment);  
+  m1.display_to_grid(environment);   
+  environment.display_ground(); 
   
+   for (int i = 0; i < fruits.size(); i++) {
+     fruits.get(i).update(); 
+     fruits.get(i).display(environment); 
+   }
   
+   
+  
+}
+
+/* Utilties **/ 
+void print_2D_array(int[][] array) {
+  for (int j = 0; j < array.length; j++) {
+    for (int i = 0; i < array[j].length; i++) {
+      println(array[j][i]) ; 
+    }
+  }
 }
