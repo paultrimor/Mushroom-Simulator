@@ -23,7 +23,7 @@ void setup() {
   
   fruits = new ArrayList<Fruit>(); 
   
-  for(int i = 0; i < 5; i++) {
+  for(int i = 0; i < 100; i++) {
     fruits.add( new Fruit(new Dna(), int(random(0, screen_width)), screen_height/2));
   }
   
@@ -32,11 +32,11 @@ void setup() {
 }
 
 void draw(){
-  background(100, 100, 100);
+  background(100, 100, 100); 
   m1.add_cell(environment);  
   m1.display_to_grid(environment);   
-  environment.display_ground(); 
-  
+  environment.display_ground();
+
    for (int i = 0; i < fruits.size(); i++) {
      fruits.get(i).update(); 
      fruits.get(i).display(environment); 

@@ -78,8 +78,7 @@ class Mycelium {
       cells[num_cells] = c;
       num_cells++; 
     }
-    
-    
+        
     environment.set_grid(rand_x, rand_y, c.get_color()); 
     
   }
