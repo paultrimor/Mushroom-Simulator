@@ -26,11 +26,15 @@ void setup() {
 void draw(){
    background(100, 100, 100); 
    
-  environment.spore_scan(environment); 
+  environment.fruit_scan(environment); 
+  environment.spore_scan(environment);   
   environment.display_ground(); 
   
+  
+}
 
- 
+void mouseClicked() {
+  environment.add_fruit( new Fruit(new Dna(), int(random(0, width)), int(environment.get_ground_level())));
 }
 
 /* Utilties **/ 

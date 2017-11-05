@@ -67,58 +67,71 @@ class Environment {
     fruits = new ArrayList<Fruit>(); 
     mycelia = new ArrayList<Mycelium>();     
     
+    // Add Expirimental Players
     
-    spores.add(new Spore(new Dna(), int(random(0, width)), int(height/4))); 
-      
-    
-    println("SIZEE: " + spores.size()); 
+     
   }
   
   void spore_scan(Environment environment){
-    println("WHY NOT?"); 
-         println("SPORE SIZE" + spores.size() ); 
     for (int i = 0; i <= spores.size()-1; i++){   
-      println("WHY YEAH!");
-
      
      spores.get(i).update(environment);     
      spores.get(i).display(environment); 
                 
      if (spores.get(i).is_on_ground()) {
-       mycelia.add(spores.get(i).germinate()); 
-       // spores.remove(i); 
-     }    
+       println("MYCELLIUM ADDED!!!!!!!!!!!!!!!!!!!!!!");
+       
+       // Limit mycellium birth
+       if (random(0, 1) < 0.5) {
+         mycelia.add(spores.get(i).germinate()); 
+       }
+   
+     }   
+     
+     if (spores.get(i).is_dead()) {
+       spores.remove(i); 
+     }
      
     }    
   }
   
   void mycelium_scan(Environment environment) {
+    
+    // Scan for mycelium that can give birth to fruit
     for (int i = 0; i <= mycelia.size()-1; i++) {
+      
       if (mycelia.get(i).is_ready()) {
         Fruit fruit = mycelia.get(i).fruit(); 
         this.fruits.add(fruit); 
-      };       
-       mycelia.get(i).add_cell(this); 
+      };      
+      
+       mycelia.get(i).update_grid(environment);      
+       mycelia.get(i).display_to_grid(environment);
        
-    }
-    
+    }   
     
   }   
   
   
   
-  void fruit_scan() {    
+  void fruit_scan(Environment environment) {    
     for (int i = 0; i < fruits.size(); i++) {
-      if (fruits.get(i).is_ready()) {
-        
-       Spore[] childern = fruits.get(i).spore();       
-       for (int j = 0; j < childern.length ; j++) {
-         this.spores.add(childern[i]); 
-       }        
+     
+      fruits.get(i).update(); 
+      fruits.get(i).display(this);    
+     
+     // Checks if Fruit is dying so that it can give birth 
+      if (fruits.get(i).is_ready()) {    
+         // Give birth to Child
+           this.spores.add( fruits.get(i).spore());    
+   
       }
-      
-      fruits.get(i).display(this);       
-      
+                
+      // Checks if Fruit is ready to Die
+      if (fruits.get(i).is_dead()) {
+        fruits.remove(i); 
+      }
+     
     }
     
   }
@@ -128,6 +141,14 @@ class Environment {
   
   }  
   
+ 
+   void add_fruit(Fruit fruit) {
+    this.fruits.add(fruit);
+  }
+  
+  void add_spore(Spore spore) {
+    this.spores.add(spore); 
+  }
    
   void display_ground() {
     line(0, ground_level, width, ground_level); 

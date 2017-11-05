@@ -22,6 +22,7 @@ class Mycelium {
       cells[i] = null; 
     }
     
+    health = 100;     
   }
   
   void set_initial_position(Environment environment, int x, int y){
@@ -35,7 +36,7 @@ class Mycelium {
   }
   
   // Add Cells 
-  void colonize(Environment environment) {
+  void update_grid(Environment environment) {
     int rows = environment.get_grid_rows(); 
     int columns = environment.get_grid_columns(); 
       
@@ -67,12 +68,12 @@ class Mycelium {
     }    
   }
   
-  void add_cell(Environment environment){
+  void add_cell(Environment environment, int x, int y){
     
     int rand_x = int(random(0, environment.get_grid_rows())); 
     int rand_y = int(random(0, environment.get_grid_columns())); 
     
-    Cell c = new Cell(rand_x, rand_y); 
+    Cell c = new Cell(x, y); 
     
     if (num_cells < cells.length){
       cells[num_cells] = c;
@@ -84,7 +85,7 @@ class Mycelium {
   }
   
   // Display to ground_grid - Update ground_grid which will be displaed
-  void display_to_grid (Environment environment) {
+  void display_to_grid(Environment environment) {
    for (int i = 0; i < cells.length; i++) {
        
      if (cells[i] != null){

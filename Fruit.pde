@@ -31,11 +31,16 @@ class Fruit {
     float variance;    
     
     // States
+    float death_rate = 0; 
+    boolean is_ready = false; 
+    boolean is_dying = false; 
     boolean is_dead = false; 
+    int health = 100; 
     
     Spore[] spores = new Spore[5]; 
     
     Fruit(Dna dna, int x, int y) {
+      this.health = 100; 
       this.dna = dna; 
       this.init_x = x;
       this.init_y = y;   
@@ -65,8 +70,10 @@ class Fruit {
               
     void update() {
         pct += step; 
+        println("PCT: " + pct); 
+        println("Health: " + this.health); 
         
-      if (pct < 9.0) {        
+      if (pct < 1.0) {        
         head_position.x = base_position.x + (pct * base_head_distance.x); 
         head_position.y = base_position.y - (pow(pct, 0.5) * base_head_distance.y); 
         
@@ -75,24 +82,43 @@ class Fruit {
                      
       }
       
-      if (pct > 9.0 ) {
-        this.is_dead = true;
-        this.step = 0; 
-        pct = 0;         
+      if (pct > 0.9 && pct < 0.901) {
+        this.is_ready = true; 
+        death_rate = 0.001;  
       }
       
+      if (pct >= 0.93) {
+        this.is_ready = false; 
+      }
+      
+      if(this.health == 0) {
+        this.is_dead = true; 
+      }
+      
+      this.health -= death_rate; 
     }
     
-    boolean is_ready(){
+    boolean is_ready() {
+      return is_ready; 
+    }
+    
+    boolean is_dying(){
+      return is_dying; 
+    }
+    
+    boolean is_dead() {
       return is_dead; 
     }
     
-    Spore[] spore() {
-      for (int i = 0; i < spores.length; i++) {
-        spores[i] = new Spore(this.dna, int(head_position.x), int(head_position.y));        
-      }
+    Spore spore() {
+      Spore spore;
+      float x_pos; 
+      float var; 
       
-      return this.spores; 
+      var = map(random(0,1), 0, 1, head_position.x - head_radius, head_position.x + head_radius); 
+      println("VAR: " + var); 
+        spore = new Spore(this.dna, int(var), int(head_position.y));        
+      return spore; 
     }
     
     void display(Environment environment) {  
@@ -130,8 +156,7 @@ class Fruit {
       //draw fruit cap 
       fill(#00ffFF); 
       arc(head_position.x, head_position.y, 100*pct, 100*pct, radians(180), radians(360));
-     
-      println(pct); 
+
     }
     
 
