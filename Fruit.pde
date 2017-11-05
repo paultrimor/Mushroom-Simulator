@@ -28,7 +28,12 @@ class Fruit {
     int time; 
     
     // Variance 
-    float variance;     
+    float variance;    
+    
+    // States
+    boolean is_dead = false; 
+    
+    Spore[] spores = new Spore[5]; 
     
     Fruit(Dna dna, int x, int y) {
       this.dna = dna; 
@@ -59,15 +64,35 @@ class Fruit {
     }
               
     void update() {
-       pct += step; 
-      if (pct < 1.0) {
+        pct += step; 
+        
+      if (pct < 9.0) {        
         head_position.x = base_position.x + (pct * base_head_distance.x); 
         head_position.y = base_position.y - (pow(pct, 0.5) * base_head_distance.y); 
         
         head_radius = start_head_radius + (pct * (end_head_radius - start_head_radius));
         base_radius = start_base_radius + (pct * (end_base_radius - start_base_radius));        
-                                
+                     
       }
+      
+      if (pct > 9.0 ) {
+        this.is_dead = true;
+        this.step = 0; 
+        pct = 0;         
+      }
+      
+    }
+    
+    boolean is_ready(){
+      return is_dead; 
+    }
+    
+    Spore[] spore() {
+      for (int i = 0; i < spores.length; i++) {
+        spores[i] = new Spore(this.dna, int(head_position.x), int(head_position.y));        
+      }
+      
+      return this.spores; 
     }
     
     void display(Environment environment) {  

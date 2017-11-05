@@ -125,7 +125,7 @@ class Mycelium {
     return new Dna(child_fruit_height, child_fruit_width, child_spore_weight, child_spore_friction, child_mycelium_rules, child_mycelium_color); 
   }  
   
-  Fruit Fruit() {
+  Fruit fruit() {
     Cell center_cell = this.compute_center(); 
     Dna new_dna = this.compute_child_dna();      
     return new Fruit(new_dna, center_cell.x, center_cell.y); 

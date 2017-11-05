@@ -5,8 +5,10 @@ int screen_height;
 Environment environment; 
 Mycelium m1;
 Fruit f1; 
+Spore spore; 
+Fruit[] fruits; 
 
-ArrayList<Fruit> fruits; 
+ArrayList<Fruit> fruitas; 
 
 void setup() {
   
@@ -16,34 +18,19 @@ void setup() {
   size(1000, 1000); 
   
   environment = new Environment(screen_width, screen_height); 
-  
-  // print_2D_array(enviroment.get_ground_grid());   
-  m1= new Mycelium(new Dna(), width/2, environment.get_ground_level()  ); 
-  m1.set_initial_position(environment,width/2 -1 , environment.get_ground_level()/2 -1 ); 
-  
-  fruits = new ArrayList<Fruit>(); 
-  
-  for(int i = 0; i < 100; i++) {
-    fruits.add( new Fruit(new Dna(), int(random(0, screen_width)), screen_height/2));
-  }
-  
+  environment.initialize_players();  
   
   
 }
 
 void draw(){
-  background(100, 100, 100); 
-  m1.add_cell(environment);  
-  m1.display_to_grid(environment);   
-  environment.display_ground();
-
-   for (int i = 0; i < fruits.size(); i++) {
-     fruits.get(i).update(); 
-     fruits.get(i).display(environment); 
-   }
-  
+   background(100, 100, 100); 
    
+  environment.spore_scan(environment); 
+  environment.display_ground(); 
   
+
+ 
 }
 
 /* Utilties **/ 
