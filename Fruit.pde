@@ -27,8 +27,12 @@ class Fruit {
     
     int time; 
     
-    // Variance 
-    float variance;    
+
+    
+    // Color Variance 
+    float variance;   
+    color cap_color; 
+    color spore_color; 
     
     // States
     float death_rate = 0; 
@@ -53,6 +57,8 @@ class Fruit {
       float length = this.dna.fruit_height * MAX_HEIGHT;    
       
       variance = random(-1,1);
+      cap_color = color(int(random(0,225)), int(random(0,225)), int(random(0,225))); 
+      spore_color = color(int(random(0,225)), int(random(0,225)), int(random(0,225))); 
       
       base_head_distance.set(variance * 40, length); 
       
@@ -70,9 +76,7 @@ class Fruit {
               
     void update() {
         pct += step; 
-        println("PCT: " + pct); 
-        println("Health: " + this.health); 
-        
+
       if (pct < 1.0) {        
         head_position.x = base_position.x + (pct * base_head_distance.x); 
         head_position.y = base_position.y - (pow(pct, 0.5) * base_head_distance.y); 
@@ -84,7 +88,7 @@ class Fruit {
       
       if (pct > 0.9 && pct < 0.901) {
         this.is_ready = true; 
-        death_rate = 0.001;  
+        death_rate = 0.0001;  
       }
       
       if (pct >= 0.93) {
@@ -113,16 +117,14 @@ class Fruit {
     Spore spore() {
       Spore spore;
       float x_pos; 
-      float var; 
       
-      var = map(random(0,1), 0, 1, head_position.x - head_radius, head_position.x + head_radius); 
-      println("VAR: " + var); 
-        spore = new Spore(this.dna, int(var), int(head_position.y));        
+        x_pos = map(random(0,1), 0, 1, head_position.x - head_radius, head_position.x + head_radius); 
+        spore = new Spore(this.dna, int(x_pos), int(head_position.y));        
       return spore; 
     }
     
     void display(Environment environment) {  
-      stroke(#ff0000); 
+      noStroke(); 
       // Draw base epllipse 
       ellipse(base_position.x, base_position.y, base_radius, base_radius); 
       
@@ -130,12 +132,10 @@ class Fruit {
       ellipse(head_position.x, head_position.y, head_radius, head_radius); 
       
       // Connect base and head with curve
-      strokeWeight(1); 
       stroke(#0000ff); 
       noFill(); 
       
       line(base_position.x, base_position.y, head_position.x, head_position.y); 
-      stroke(#ff0000); 
       
       // ellipse(base_position.x, base_position.y, 10, 10); 
       // ellipse(head_position.x, head_position.y, 10, 10);      
@@ -145,7 +145,8 @@ class Fruit {
       fill(#ff0000); 
       
       // Draw fruit stem 
-      
+      noStroke(); 
+      fill(#F0FFF0); 
       beginShape(); 
       vertex(base_position.x + base_radius/2, base_position.y); 
       vertex(head_position.x + head_radius/2, head_position.y); 
@@ -154,7 +155,8 @@ class Fruit {
       endShape(); 
       
       //draw fruit cap 
-      fill(#00ffFF); 
+      noStroke(); 
+      fill(this.cap_color); 
       arc(head_position.x, head_position.y, 100*pct, 100*pct, radians(180), radians(360));
 
     }

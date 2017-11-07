@@ -3,13 +3,13 @@ class Cell {
   int x; 
   int y; 
   
-  color cell_color; 
+  int cell_color; 
   
   Cell(int new_x, int new_y) {
     this.x = new_x; 
     this.y = new_y; 
     
-    this.cell_color = #FFFFFF;
+    this.cell_color = 250;
   }
   
   color get_color() {

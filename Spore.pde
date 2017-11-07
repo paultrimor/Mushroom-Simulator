@@ -7,7 +7,7 @@ class Spore {
   // states     
   float health; 
   float death_rate = 0;   
-  boolean on_ground; 
+  boolean on_ground = false; 
   boolean is_dead; 
   
   Spore(Dna dna, int x, int y) {
@@ -20,18 +20,16 @@ class Spore {
     tx = 100 * random(0,1); 
     ty = 300 * random(0,1); 
     
-    on_ground = true; 
+    on_ground = false; 
   }
   
   float tick = 0.01; 
   void update(Environment enviornment) {
     
     if (y_pos > enviornment.get_ground_level()) {
-      
       println("HITS GROUND!"); 
-      x_pos = 250;
-      y_pos = 250; 
       on_ground = true;       
+      is_dead = true; 
     } else {
       x_pos += map(noise(tx), 0, 1, -3, 3); 
       y_pos += map(noise(ty), 0, 1, -1, 2.5); 
@@ -51,6 +49,7 @@ class Spore {
   
   void display(Environment enviornment) {
     // draw spore
+    fill(#00ff0f); 
     ellipse(x_pos, y_pos , 5, 5); 
     
   }
@@ -64,11 +63,16 @@ class Spore {
   }
   
   Mycelium germinate() {
+    println("NEW MYCELIUM CREATED!"); 
     return new Mycelium(this.dna, int(this.x_pos), int(this.y_pos) + 100); 
   } 
   
   float get_y_pos() {
     return this.y_pos; 
+  }
+  
+  float get_x_pos() {
+    return this.x_pos; 
   }
   
   

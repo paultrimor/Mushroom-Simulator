@@ -4,8 +4,9 @@ class Dna {
   float fruit_width;
   float spore_weight;
   float spore_friction;
+  color spore_color; 
   float mycelium_rules; 
-  color mycelium_color; 
+  int mycelium_color; 
   
   float[] property_array = new float[5]; 
    
@@ -14,8 +15,9 @@ class Dna {
       fruit_width = random(0,1);
       spore_weight = random(0,1); 
       spore_friction = random(0,1); 
+      spore_color = color(random(0,1), random(0,1), random(0,1)); 
       mycelium_rules = random(0,1);   
-      mycelium_color = int(random(0,10000));
+      mycelium_color = int(random(0,225));
   }
   
   // Dna Setter
@@ -32,6 +34,9 @@ class Dna {
     return this.mycelium_color; 
   }
   
+  color get_spore_color() {
+    return this.spore_color; 
+  }
   
   // Copy new Dna to memory 
   Dna copy() {
