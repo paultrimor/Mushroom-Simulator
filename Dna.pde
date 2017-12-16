@@ -17,7 +17,7 @@ class Dna {
       spore_friction = random(0,1); 
       spore_color = color(random(0,1), random(0,1), random(0,1)); 
       mycelium_rules = random(0,1);   
-      mycelium_color = int(random(0,225));
+      mycelium_color = int(random(-16777216, -1));
   }
   
   // Dna Setter

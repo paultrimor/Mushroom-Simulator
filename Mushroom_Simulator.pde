@@ -16,8 +16,7 @@ void setup() {
   
   environment = new Environment(screen_width, screen_height); 
   environment.initialize_grid(); 
-  environment.initialize_players(); 
-  
+  environment.initialize_players();   
   
 }
 
@@ -35,23 +34,13 @@ void draw(){
 //  environment.add_fruit( new Fruit(new Dna(), int(random(0, width)), int(environment.get_ground_level())));
 //}
 
-
-int click = 1; 
-
+int tx = int(random(0,1000)); 
 void mouseClicked() {
-  println("CLICK: " + click); 
-  if (click == 0){
-    environment.add_mycelium(); 
-  } else if (click == 1) {
-   environment.add_fruit( new Fruit(new Dna(), mouseX, int(environment.get_ground_level()) + 10));
-  } else if (click == 2) {
-    for (int i = 0; i < 300; i++) {
-      environment.add_fruit( new Fruit(new Dna(), int(random(0, width)), int(environment.get_ground_level()) + 10));
-    }
-  }
   
-  
-  //click++; 
+  int pos_x = int(map(noise(tx), 0, 1, 0, width));            
+  environment.add_fruit(new Fruit(new Dna(), pos_x, int(environment.get_ground_level() + 5))); 
+  tx += 1.5; 
+   
 }
 
 /* Utilties **/ 

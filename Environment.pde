@@ -83,11 +83,10 @@ class Environment {
      if (spores.get(i).is_on_ground()) {     
        
        // Limit mycellium birth rate
-       if (random(0, 1) > 0.93) {
+       if (random(0, 1) > 0.99) {
          Mycelium m = spores.get(i).germinate(); 
          m.set_initial_position(environment, int(spores.get(i).get_x_pos()), int(spores.get(i).get_y_pos()));
          mycelia.add(m);
-         println("SIZE: " + mycelia.size());
           
        }
      }   
@@ -126,9 +125,9 @@ class Environment {
       }
                 
       // Checks if Fruit is ready to Die
-      if (fruits.get(i).is_dead()) {
-        fruits.remove(i); 
-      }
+    //  if (fruits.get(i).is_dead()) {
+    //    fruits.remove(i); 
+   //   }
      
     }
     
@@ -160,7 +159,6 @@ class Environment {
   }
    
   void display_ground() {
-    println("MYCELIA SIZE: " + mycelia.size()); 
    for( int j = 1; j < ground_grid_columns-1; j++) {
       for (int i = 1; i < ground_grid_rows-1; i++) {           
         

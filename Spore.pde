@@ -27,7 +27,6 @@ class Spore {
   void update(Environment enviornment) {
     
     if (y_pos > enviornment.get_ground_level()) {
-      println("HITS GROUND!"); 
       on_ground = true;       
       is_dead = true; 
     } else {
@@ -41,7 +40,6 @@ class Spore {
     
     if (health < 0 ) {
       this.is_dead = true; 
-      println("DEAD SPORE"); 
     }
     
     this.health -= this.death_rate; 
@@ -49,8 +47,8 @@ class Spore {
   
   void display(Environment enviornment) {
     // draw spore
-    fill(#00ff0f); 
-    ellipse(x_pos, y_pos , 5, 5); 
+    fill(this.dna.mycelium_color); 
+    ellipse(x_pos, y_pos , 4, 4); 
     
   }
   
@@ -63,7 +61,6 @@ class Spore {
   }
   
   Mycelium germinate() {
-    println("NEW MYCELIUM CREATED!"); 
     return new Mycelium(this.dna, int(this.x_pos), int(this.y_pos) + 100); 
   } 
   

@@ -35,7 +35,7 @@ class Fruit {
     color spore_color; 
     
     // States
-    float death_rate = 0; 
+    float death_rate = 0.001; 
     boolean is_ready = false; 
     boolean is_dying = false; 
     boolean is_dead = false; 
