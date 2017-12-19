@@ -75,8 +75,7 @@ class Mycelium {
                 }       
 
           }           
-          
-          
+                    
           if (num_cells > 1500) {
             is_dying = true; 
           }
