@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class Environment {
 	PApplet processing; 
 	
+	boolean continuous_mode = false; // 1 - traditional, 0 - continuous 
+	
 	// Dimensions in pixels 
 	int width, height; 	
 	int ground_level; 
@@ -24,9 +26,10 @@ public class Environment {
 	
 	int ground_grid_rows, ground_grid_columns;
 	
-	Environment(PApplet p, int screen_width, int screen_height) {
+	Environment(PApplet p, int screen_width, int screen_height, boolean mode) {
 		this.processing = p; 
-		
+
+		this.continuous_mode = mode; 
 		this.width 	= screen_width; 
 		this.height = screen_height; 
 		
@@ -45,9 +48,19 @@ public class Environment {
 		for (int j = 1; j < this.ground_grid_columns-1; j++) {
 			for (int i = 1; i < this.ground_grid_rows-1; i++) {
 				
-				processing.rect(j*w, i*w, w, w);
+				processing.rect(i*w, j*w + this.ground_level, w, w);
 			}
 		}
+	}
+	
+	public void initialize_players() {
+		spores = new ArrayList<Spore>(); 
+		mycelia = new ArrayList<Mycelium>();
+		fruits = new ArrayList<Fruit>(); 		
+		
+		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
+		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
+	
 	}
 	
 	public void initialize_ground_grid() {
@@ -59,19 +72,21 @@ public class Environment {
 	}
 	
 	/** Scan and examine main Players **/ 
-	public void spore_scan(Environment environment) {
+	public void spore_scan() {
 		for (int i = 0; i  <= spores.size()-1; i++) {
-			
+			Spore spore = spores.get(i); 
+			spore.update(this);
+			spore.display(this);
 		}
 	}
 	
-	public void mycelium_scan(Environment environment) {
+	public void mycelium_scan() {
 		for (int i = 0; i < mycelia.size()-1; i++) {
 			
 		}
 	}
 	
-	public void fruit_scan(Environment environment) {
+	public void fruit_scan() {
 		for (int i = 0; i < fruits.size()-1; i++) {
 			
 		}

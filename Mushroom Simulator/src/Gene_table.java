@@ -1,6 +1,6 @@
 import processing.core.*; 
 
-public class Info_Table extends PApplet{
+public class Gene_table extends PApplet{
 
 	public void settings() {
 		size(500, 500);
@@ -13,4 +13,5 @@ public class Info_Table extends PApplet{
 	public void draw() {
 		
 	}
+	
 }

@@ -6,7 +6,7 @@ public class Mycelium {
 	Dna dna; 
 	Dna partner_dna; 
 	
-	Cell[] cells = new Cell[4000];
+	Cell[] cells = new Cell[2000]; 
 	
 	int init_x, init_y; 
 	
@@ -30,7 +30,6 @@ public class Mycelium {
 		this.is_dead	= false; 
 		
 		initialize_cells(); 
-			
 	}
 	
 	public void initialize_cells() {
@@ -43,4 +42,32 @@ public class Mycelium {
 		this.init_x = x; 
 		this.init_y = y;		
 	}
+	
+	public void update(Environment environment) {
+		
+		int current; 
+		int top, top_left, top_right; 
+		
+		for (int j = 1; j < environment.get_grid_columns() -1; j++) {
+			for (int i = 1; i < environment.get_grid_rows() -1; i++) {
+			
+				current = environment.get_grid(i, j);
+				
+				top 	  = environment.get_grid(i, j-i); 
+				top_left  = environment.get_grid(i-1, j-i); 
+				top_right = environment.get_grid(i+1, j-1);
+				
+				
+			}
+		}
+	}
+
+	public void display_to_grid(Environment environment) {
+		for (int i = 0; i < cells.length; i++) {
+			if (cells[i] != null) {
+				environment.set_grid(cells[i].x, cells[i].y, 1);
+			}
+		}
+	}
 }
+

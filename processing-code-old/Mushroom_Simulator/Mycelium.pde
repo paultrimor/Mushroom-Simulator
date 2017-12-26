@@ -93,7 +93,7 @@ class Mycelium {
    for (int i = 0; i < cells.length; i++) {
      if (cells[i] != null){       
         // Cover the color of the cell to an integer                
-         environment.set_grid(cells[i].x, cells[i].y, 99);
+         environment.set_grid(cells[i].x, cells[i].y, 1);
      }
    }
    

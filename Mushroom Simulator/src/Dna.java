@@ -1,3 +1,4 @@
+import processing.core.*; 
 
 public class Dna {
 	
@@ -5,7 +6,16 @@ public class Dna {
 	float fruit_width; 
 	
 	float spore_weight; 
-	float spore_friction; 
+	float spore_friction;
 	
+	
+	Dna() {
+		this.fruit_height 	= (float)(Math.random()); 
+		this.fruit_width 	= (float)(Math.random()); 
+		
+		this.spore_weight 	= (float)(Math.random()); 
+		this.spore_friction = (float)(Math.random()); 
+		
+	}
 	
 }
