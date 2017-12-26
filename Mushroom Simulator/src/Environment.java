@@ -45,9 +45,9 @@ public class Environment {
 	}
 	
 	public void display_ground() {
-		for (int j = 1; j < this.ground_grid_columns-1; j++) {
-			for (int i = 1; i < this.ground_grid_rows-1; i++) {
-				
+		for (int j = 0; j < this.ground_grid_columns-1; j++) {
+			for (int i = 0; i < this.ground_grid_rows-1; i++) {
+				processing.fill(this.ground_grid[j][i]); 
 				processing.rect(i*w, j*w + this.ground_level, w, w);
 			}
 		}
@@ -60,6 +60,12 @@ public class Environment {
 		
 		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
+		
+		int x = (int)(processing.random(0, this.width));
+		System.out.println("width: " + x);
+		
+		mycelia.add(new Mycelium(processing, new Dna(), x, this.ground_level)); 
+		mycelia.get(0).set_initial_position(this, x, 0); // ground_grid height is already offset in the display. ground_level = 0
 	
 	}
 	
@@ -81,8 +87,10 @@ public class Environment {
 	}
 	
 	public void mycelium_scan() {
-		for (int i = 0; i < mycelia.size()-1; i++) {
-			
+		for (int i = 0; i < mycelia.size(); i++) {
+			Mycelium mycelium = mycelia.get(i); 
+			mycelium.update(this);
+			mycelium.display_to_grid(this);
 		}
 	}
 	
@@ -99,7 +107,7 @@ public class Environment {
 	  
 	public int[][] get_ground_grid() { return ground_grid; }
 	  
-	public int get_grid(int x, int y) { return this.ground_grid[y][x]; }
+	public int get_grid(int x, int y) { return this.ground_grid[y/w][x/w]; }
 	  
 	public int get_grid_rows() { return this.ground_grid_rows; }
 	  

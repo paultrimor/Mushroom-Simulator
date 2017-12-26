@@ -25,11 +25,20 @@ public class Mushroom_Simulator extends PApplet{
 	public void draw() {
 		noStroke(); 
 		background(0); 
-		environment.display_ground();
 		environment.spore_scan(); 
-		// environment.fruit_scan(); 
-		// environment.mycelium_scan(); 
+
+		environment.mycelium_scan(); 
+		environment.display_ground();
 				
 	}
 	
+
+	/** Utilties **/ 
+	public void print_2D_array(int[][] array) {
+		for (int j = 0; j < array.length; j++) {
+			for (int i = 0; i < array[j].length; i++) {
+				System.out.println(array[j][i]) ; 
+			}
+		}
+	}
 }
