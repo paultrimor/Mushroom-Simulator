@@ -61,11 +61,11 @@ public class Environment {
 		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		
-		int x = (int)(processing.random(0, this.width));
-		System.out.println("width: " + x);
-		
-		mycelia.add(new Mycelium(processing, new Dna(), x, this.ground_level)); 
-		mycelia.get(0).set_initial_position(this, x, 0); // ground_grid height is already offset in the display. ground_level = 0
+		mycelia.add(new Mycelium(processing, new Dna(), 250, this.ground_level)); 
+		mycelia.get(0).set_initial_position(this, 200, 0); // ground_grid height is already offset in the display. ground_level = 0
+
+	//	mycelia.add(new Mycelium(processing, new Dna(), 600, this.ground_level)); 
+	//	mycelia.get(1).set_initial_position(this, 600, 0); // ground_grid height is already offset in the display. ground_level = 0
 	
 	}
 	
@@ -100,6 +100,19 @@ public class Environment {
 		}
 	}
 	
+	/** Environment Interface **/ 
+	
+	public void add_mycelium() {
+		
+	}
+	
+	public void add_spore() {
+		
+	}
+	
+	public void add_fruit() {
+		
+	}	
 	
 	/** Environment Getters and Setters **/ 
 
@@ -107,7 +120,7 @@ public class Environment {
 	  
 	public int[][] get_ground_grid() { return ground_grid; }
 	  
-	public int get_grid(int x, int y) { return this.ground_grid[y/w][x/w]; }
+	public int get_grid(int x, int y) { return this.ground_grid[y][x]; }
 	  
 	public int get_grid_rows() { return this.ground_grid_rows; }
 	  

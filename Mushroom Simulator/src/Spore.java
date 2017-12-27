@@ -57,6 +57,7 @@ public class Spore {
 	}
 	
 	public void display(Environment environment) {
+		processing.fill(150); 
 		processing.ellipse(x_pos, y_pos, 5, 5);
 	}
 	

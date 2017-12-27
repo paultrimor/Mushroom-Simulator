@@ -6,7 +6,7 @@ public class Mycelium {
 	Dna dna; 
 	Dna partner_dna; 
 	
-	Cell[] cells = new Cell[2000]; 
+	Cell[] cells = new Cell[6000]; 
 	int num_cells; 
 	
 	int init_x, init_y; 
@@ -54,16 +54,43 @@ public class Mycelium {
 		
 		for (int j = 1; j < environment.get_grid_columns() -1; j++) {
 			for (int i = 1; i < environment.get_grid_rows() -1; i++) {
+				
+				System.out.println("j = " + j + ", i = " + i);
 			
-			/**
 				current = environment.get_grid(i, j);
 				
-				top 	  = environment.get_grid(i, j-i); 
-				top_left  = environment.get_grid(i-1, j-i); 
+				/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
+				 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
+				 */
+				
+				top 	  = environment.get_grid(i, j-1); 
+				top_left  = environment.get_grid(i-1, j-1); 
 				top_right = environment.get_grid(i+1, j-1);
-			**/
 				
+				if (top_left != 0 && top_right != 0) {
+					if ( Math.random() < this.dna.mycelium_center_probability ) {
+						cells[num_cells] = new Cell(i*4, j*4);
+						environment.set_grid(i*4, j*4, 1);
+						num_cells++;
+					} 
+				}
 				
+				if (top_left == 0 && top_right != 0) {
+					if ( Math.random() < this.dna.mycelium_center_probability ) {
+						cells[num_cells] = new Cell(i*4, j*4);
+						environment.set_grid(i*4, j*4, 1);
+						num_cells++;
+					} 
+				}
+				
+				if (top_left != 0 && top_right == 0) {
+					if ( Math.random() < this.dna.mycelium_center_probability ) {
+						cells[num_cells] = new Cell(i*4, j*4);
+						environment.set_grid(i*4, j*4, 1);
+						num_cells++;
+					} 
+				}
+			
 			}
 		}
 	}

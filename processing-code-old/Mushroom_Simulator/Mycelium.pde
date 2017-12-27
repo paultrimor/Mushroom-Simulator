@@ -120,7 +120,7 @@ class Mycelium {
   int get_y_init() {
     return this.y_init; 
   }
-  // Get the cell coordinates of partner and mycelium   
+  // Get the cell coordinates of partner and mycelium       
   Cell compute_center() {
     int rand_x = int(random(0, environment.get_grid_rows())); 
     int rand_y = int(random(0, environment.get_grid_columns())); 
