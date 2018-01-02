@@ -58,14 +58,14 @@ public class Environment {
 		mycelia = new ArrayList<Mycelium>();
 		fruits = new ArrayList<Fruit>(); 		
 		
-		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
-		spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
+		// spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
+		// spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		
 		mycelia.add(new Mycelium(processing, new Dna(), 250, this.ground_level)); 
-		mycelia.get(0).set_initial_position(this, 200, 0); // ground_grid height is already offset in the display. ground_level = 0
+		mycelia.get(0).set_initial_position(this, 200, 20); // ground_grid height is already offset in the display. ground_level = 0
 
-	//	mycelia.add(new Mycelium(processing, new Dna(), 600, this.ground_level)); 
-	//	mycelia.get(1).set_initial_position(this, 600, 0); // ground_grid height is already offset in the display. ground_level = 0
+		mycelia.add(new Mycelium(processing, new Dna(), 600, this.ground_level)); 
+		mycelia.get(1).set_initial_position(this, 600, 20); // ground_grid height is already offset in the display. ground_level = 0
 	
 	}
 	
@@ -120,6 +120,8 @@ public class Environment {
 	  
 	public int[][] get_ground_grid() { return ground_grid; }
 	  
+	public int get_w() { return this.w; }
+	
 	public int get_grid(int x, int y) { return this.ground_grid[y][x]; }
 	  
 	public int get_grid_rows() { return this.ground_grid_rows; }

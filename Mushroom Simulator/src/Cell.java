@@ -2,7 +2,7 @@ import processing.core.*;
 
 public class Cell {
 	
-	int x; 
+	int x; // in pixels 
 	int y; 
 	
 	int previous_state; 
@@ -12,6 +12,10 @@ public class Cell {
 		this.x = x;
 		this.y = y; 
 	}
+	
+	public int get_x() { return this.x; }
+	
+	public int get_y() { return this.y; }
 		
 	
 	

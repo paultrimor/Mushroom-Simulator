@@ -47,52 +47,74 @@ public class Mycelium {
 		
 	}
 	
+	// Num_cell temporary variables 
+	int start = 0, stop; 
 	public void update(Environment environment) {
+		/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
+		 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
+		*/	
 		
-		int current; 
-		int top, top_left, top_right; 
+		Cell current; 
+		int left_2_cell, right_2_cell; 
+		int bottom_left, bottom_right; 
 		
-		for (int j = 1; j < environment.get_grid_columns() -1; j++) {
-			for (int i = 1; i < environment.get_grid_rows() -1; i++) {
-				
-				System.out.println("j = " + j + ", i = " + i);
+		int w = environment.get_w(); 
+		start = num_cells - 1; 
+		
+		for (int i = start; i < stop; i++) {
+			System.out.println("WORLD");
+			current = cells[i]; 
 			
-				current = environment.get_grid(i, j);
-				
-				/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
-				 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
-				 */
-				
-				top 	  = environment.get_grid(i, j-1); 
-				top_left  = environment.get_grid(i-1, j-1); 
-				top_right = environment.get_grid(i+1, j-1);
-				
-				if (top_left != 0 && top_right != 0) {
-					if ( Math.random() < this.dna.mycelium_center_probability ) {
-						cells[num_cells] = new Cell(i*4, j*4);
-						environment.set_grid(i*4, j*4, 1);
-						num_cells++;
-					} 
-				}
-				
-				if (top_left == 0 && top_right != 0) {
-					if ( Math.random() < this.dna.mycelium_center_probability ) {
-						cells[num_cells] = new Cell(i*4, j*4);
-						environment.set_grid(i*4, j*4, 1);
-						num_cells++;
-					} 
-				}
-				
-				if (top_left != 0 && top_right == 0) {
-					if ( Math.random() < this.dna.mycelium_center_probability ) {
-						cells[num_cells] = new Cell(i*4, j*4);
-						environment.set_grid(i*4, j*4, 1);
-						num_cells++;
-					} 
-				}
+			left_2_cell = environment.get_grid(
+					(current.get_x()/w) - 2,
+					(current.get_y()/w)
+			);  
 			
+			right_2_cell = environment.get_grid(
+					(current.get_x()/w) + 2,
+					(current.get_y()/w)
+			); 
+			
+			bottom_left = environment.get_grid(
+					(current.get_x()/w) + 1, 
+					(current.get_y()/w) - 1
+			); 
+			
+			bottom_right = environment.get_grid(
+					(current.get_x()/w) - 1, 
+					(current.get_y()/w)	- 1
+			);
+			
+			if (left_2_cell != 0) {
+				if (Math.random() < this.dna.mycelium_center_probability/2) {
+					// Set the cell for bottom_left	(Half Mycelium_center_probability)
+					
+				}
+			} else {
+				if (Math.random() < this.dna.mycelium_edge_probability) {
+					// Set the cell for bottom left (Full Mycelium_edge_probability)
+					cells[num_cells] = new Cell(current.x - 1, current.y + 1); 
+					environment.set_grid(current.x/w, current.y/w, 1);
+					num_cells++; 
+				} 
 			}
-		}
+			
+			if (right_2_cell != 0) {
+				if (Math.random() < this.dna.mycelium_center_probability/2) {
+					// Set the cell for bottom right (Half Mycelium_center_probability)
+				}
+			} else {
+				System.out.println("Hello");
+				if (Math.random() < this.dna.mycelium_edge_probability) {
+					// Set the cell for bottom right (Full Mycelium_edge_probability)
+					cells[num_cells] = new Cell(current.x + 1, current.y + 1); 
+					environment.set_grid(current.x/w, current.y/w, 1);
+					num_cells++; 
+				}
+			}			
+			
+		} // end Cell For loop 
+		stop = num_cells; 
 	}
 
 	public void display_to_grid(Environment environment) {

@@ -8,6 +8,7 @@ public class Fruit {
 	int init_x, init_y; 
 	
 	int MAX_HEIGHT = 300; 
+	int MIN_HEIGHT = 80; 
 	float length; 
 	
 	PVector base_position; 	
@@ -20,12 +21,13 @@ public class Fruit {
 	float end_base_radius; 
 	float end_head_radius; 
 	
-	// Each Mushroom 
-	Spore[] spores = new Spore[5];
-	
 	// State variables 
 	float health, death_rate; 
 	boolean is_ready, is_dying, is_dead; 
+	
+	// Animation variables 
+	float pct 	= 0.0f; 
+	float step 	= 0.001f;
 	
 	Fruit(PApplet p, Dna dna, int x, int y) {
 		this.processing = p; 
@@ -40,9 +42,12 @@ public class Fruit {
 		this.is_dead  = false; 
 		
 		this.base_position = new PVector(init_x, init_y); 
-		this.head_position = new PVector(init_x, init_y);
+		this.head_position = new PVector(init_x, init_y);		
 		
-		this.length = this.dna.fruit_height * MAX_HEIGHT;
+		this.length = MIN_HEIGHT + this.dna.fruit_height * (MAX_HEIGHT-MIN_HEIGHT);
+		
+		
+		
 	} 
 	
 	void update() {

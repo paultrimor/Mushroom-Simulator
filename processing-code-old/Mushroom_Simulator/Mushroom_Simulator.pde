@@ -17,11 +17,6 @@ void setup() {
   environment = new Environment(screen_width, screen_height); 
   environment.initialize_grid(); 
   environment.initialize_players();   
-  
- // Data DNA Table display
- String[] args = {"TwoFrameTest"};
- SecondApplet sa = new SecondApplet(); 
- PApplet.runSketch(args, sa); 
  
 }
 
@@ -54,17 +49,5 @@ void print_2D_array(int[][] array) {
     for (int i = 0; i < array[j].length; i++) {
       println(array[j][i]) ; 
     }
-  }
-}
-
-/** Create DNA Table window **/ 
-public class SecondApplet extends PApplet {
-  
-  public void settings() {
-    size(500, 100); 
-  }
-  
-  public void draw() {
-    background(random(0, 100), random(0, 100), random(150, 250));
   }
 }
