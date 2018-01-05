@@ -26,7 +26,7 @@ public class Mushroom_Simulator extends PApplet{
 		noStroke(); 
 		background(0); 
 		environment.spore_scan(); 
-
+		environment.fruit_scan(); 
 		environment.mycelium_scan(); 
 		environment.display_ground();
 				

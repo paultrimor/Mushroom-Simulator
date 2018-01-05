@@ -2,20 +2,20 @@ import processing.core.*;
 
 public class Cell {
 	
-	int x; // in pixels 
-	int y; 
+	int x_offset; // in pixels 
+	int y_offset; 
 	
 	int previous_state; 
 	int next_state; 
 	
-	Cell(int x, int y) {
-		this.x = x;
-		this.y = y; 
+	Cell(int x_offset, int y_offset) {
+		this.x_offset = x_offset;
+		this.y_offset = y_offset; 
 	}
 	
-	public int get_x() { return this.x; }
+	public int get_x() { return this.x_offset; }
 	
-	public int get_y() { return this.y; }
+	public int get_y() { return this.y_offset; }
 		
 	
 	

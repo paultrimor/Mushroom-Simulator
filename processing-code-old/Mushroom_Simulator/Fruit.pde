@@ -27,8 +27,6 @@ class Fruit {
     
     int time; 
     
-
-    
     // Color Variance 
     float variance;   
     color cap_color; 
