@@ -18,7 +18,11 @@ public class Mushroom_Simulator extends PApplet{
 		
 		 environment = new Environment(this, 1000, 1000, false);
 		 environment.initialize_ground_grid();
+
+		 
 		 environment.initialize_players(); 
+		 
+		 
 		
 	}
 	

@@ -6,7 +6,6 @@ import java.util.ArrayList;
  *		This class mainly handles the communication between the ground_grid 2D array 
  *		and the Mycelium Cell[][] property, and the manages the process of birth and death
  *		The Enivornment is GOD >~~~~~(0_0)~~~~~<   
- *		
  */
 public class Environment {
 	PApplet processing; 
@@ -44,15 +43,6 @@ public class Environment {
 		
 	}
 	
-	public void display_ground() {
-		for (int j = 0; j < this.ground_grid_columns-1; j++) {
-			for (int i = 0; i < this.ground_grid_rows-1; i++) {
-				processing.fill(this.ground_grid[j][i]); 
-				processing.rect(i*w, j*w + this.ground_level, w, w);
-			}
-		}
-	}
-	
 	public void initialize_players() {
 		spores = new ArrayList<Spore>(); 
 		mycelia = new ArrayList<Mycelium>();
@@ -61,7 +51,10 @@ public class Environment {
 		// spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		// spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		
-		mycelia.add(new Mycelium(processing, new Dna(), 500, 500));
+		// The Mycelium class displays on the ground grid coordinate 
+		
+		
+		 mycelia.add(new Mycelium(processing, new Dna(), 500, 0)); 
 		
 		// fruits.add(new Fruit(processing, new Dna(), 500, 500)); 
 	}
@@ -70,6 +63,16 @@ public class Environment {
 		for (int j = 0; j < this.ground_grid_columns; j++) {
 			for (int i = 0; i < this.ground_grid_rows; i++) {
 				this.ground_grid[j][i] = 0; 
+			}
+		}
+	}
+	
+	public void display_ground() {
+		for (int j = 0; j < this.ground_grid_columns-1; j++) {
+			for (int i = 0; i < this.ground_grid_rows-1; i++) {
+				processing.fill(this.ground_grid[j][i]); 
+				processing.stroke(50); 
+				processing.rect(i*w, j*w + this.ground_level, w, w);
 			}
 		}
 	}

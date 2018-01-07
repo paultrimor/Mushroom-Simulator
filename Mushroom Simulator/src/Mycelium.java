@@ -50,6 +50,9 @@ public class Mycelium {
 		/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
 		 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
 		*/	
+		
+		// Testing update. 
+		
 	}
 	
 	
@@ -60,7 +63,10 @@ public class Mycelium {
 				// Convert Mycelium cell position to ground_grid coordinates. 
 				int i = (this.init_x_position/environment.w) + cells[c].x_offset; 
 				int j = (this.init_y_position/environment.w) + cells[c].y_offset; 
-				environment.set_grid(j, 1, 100);
+
+				environment.set_grid(i, j, 100);
+				
+				
 			}
 		}
 	}
