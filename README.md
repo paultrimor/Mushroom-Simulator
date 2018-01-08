@@ -1,9 +1,7 @@
 
 ## To-do List 
 
-1. Recreate Conway's Game of Life in the Mycellium Class -> ground_grid
-2. Finalize the DNA Class.  
-	* What does each float variable mean? 
-	* Is information passed from spore -> Mycellium -> Fruit -> Spore
-	* How is the DNA color represented in the Ground Grid? 
-3. Create a GENE table to better understand what is going on! 
+1. Fix Mycelium growth algorithm 
+
+	- If a single cell is added after iteration in the update, the growth rate is linear. 
+	- If two cells are added after every iteration in the update, the growth rate is squared
