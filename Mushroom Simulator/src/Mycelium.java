@@ -83,6 +83,27 @@ public class Mycelium {
 					this.init_y_position/environment.w + cells[i].y_offset
 			); 
 			
+			int right_2_cell = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset + 2, 
+					this.init_y_position/environment.w + cells[i].y_offset
+			);
+			
+			int bottom_left = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset + 1, 
+					this.init_y_position/environment.w + cells[i].y_offset + 1
+			);
+			
+			int bottom_right = environment.get_grid(
+					this.init_x_position/environment.w - 1, 
+					this.init_y_position/environment.w + 1
+			);
+			
+			
+			
+			
+			
+			
+			
 			// Add cell to bottom right 
 			// System.out.println("\t cell added!");
 			if (Math.random() > 0.99) {
