@@ -54,24 +54,11 @@ public class Mycelium {
 		// Temporary variable for storing previous num_cells 
 		int temp_prev_num_cells = prev_num_cells; 
 		int temp_num_cells = num_cells; 
-		
-		System.out.println(
-				"------ Before swap ---------" + 
-				"\n temp_prev_num_cells: " + temp_prev_num_cells + 
-				"\n temp_num_cells: " + temp_num_cells 
-				);	
-		
-		temp_num_cells = num_cells; 
-		
-		System.out.println(
-				"------ After Swap ---------" + 
-				"\n temp_prev_num_cells: " + temp_prev_num_cells + 
-				"\n temp_num_cells: " + temp_num_cells 
-				);	
-		
+	
+		prev_num_cells = num_cells; 
+
 		for (int i = temp_prev_num_cells; i < temp_num_cells; i++) {
-			System.out.println("\t investigating cell: " + i);
-			
+
 			// Testing update. 			
 			int current = environment.get_grid(
 					this.init_x_position/environment.w + cells[i].x_offset, 
@@ -100,17 +87,26 @@ public class Mycelium {
 			
 			
 			
-			
-			
-			
-			
-			// Add cell to bottom right 
-			// System.out.println("\t cell added!");
-			if (Math.random() > 0.99) {
-				add_cell(
-					this.cells[i].x_offset + 1, 
-					this.cells[i].y_offset + 1);
+			if (left_2_cell != 0) {
+				if (Math.random() < 0.6) {
+					add_cell(cells[i].x_offset - 1, cells[i].y_offset + 1); 
+				}				
+			} else {
+				if (Math.random() < 0.4) {
+					add_cell(cells[i].x_offset + 1, cells[i].y_offset + 1);
+				}
 			}
+			
+			if (right_2_cell != 0) {
+				if (Math.random() < 0.6) {
+					add_cell(cells[i].x_offset + 1, cells[i].y_offset + 1); 
+				}
+			} else {
+				if (Math.random() < 0.4) {
+					add_cell(cells[i].x_offset - 1, cells[i].y_offset + 1);
+				}
+			}
+						
 		}		
 				
 	}
@@ -118,6 +114,7 @@ public class Mycelium {
 	public void add_cell(int x, int y) {
 		cells[num_cells] = new Cell(x, y); 
 		num_cells++; 
+		System.out.println("cell was just added");
 	}
 		
 	public void display_to_grid(Environment environment) {
