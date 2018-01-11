@@ -45,7 +45,6 @@ public class Mycelium {
 	}
 	
 	int prev_num_cells = 0; 
-	int temp_num_cells, temp_prev_num_cells; 
 	public void update(Environment environment) {
 		/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
 		 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
@@ -54,11 +53,10 @@ public class Mycelium {
 		// Temporary variable for storing previous num_cells 
 		int temp_prev_num_cells = prev_num_cells; 
 		int temp_num_cells = num_cells; 
-	
-		prev_num_cells = num_cells; 
-
+		
+		System.out.println("update(): t_prev_num: " + temp_prev_num_cells + " t_num_cells: " + temp_num_cells);
 		for (int i = temp_prev_num_cells; i < temp_num_cells; i++) {
-
+			System.out.println("\titeration : " + i);
 			// Testing update. 			
 			int current = environment.get_grid(
 					this.init_x_position/environment.w + cells[i].x_offset, 
@@ -107,14 +105,16 @@ public class Mycelium {
 				}
 			}
 						
-		}		
-				
+		} // end for loop 
+		if (temp_num_cells != num_cells) {
+			prev_num_cells = temp_num_cells; 
+		}
 	}
 	
 	public void add_cell(int x, int y) {
 		cells[num_cells] = new Cell(x, y); 
 		num_cells++; 
-		System.out.println("cell was just added");
+		System.out.println("\tcell was just added @: ("+x+","+y+")");
 	}
 		
 	public void display_to_grid(Environment environment) {

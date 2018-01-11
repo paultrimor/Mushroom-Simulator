@@ -21,7 +21,7 @@ public class Environment {
 	ArrayList<Fruit> fruits; 
 	
 	int[][] ground_grid; 
-	int w = 16; // down sizes environment dimensions, must be even number! 
+	int w = 2; // down sizes environment dimensions, must be even number! 
 	
 	int ground_grid_rows, ground_grid_columns;
 	
