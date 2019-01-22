@@ -52,11 +52,11 @@ public class Environment {
 		// spores.add(new Spore(processing, new Dna(),(int) (processing.random(0, this.width)), this.ground_level/4)); 			
 		
 		// The Mycelium class displays on the ground grid coordinate 
-		
-		
-		 mycelia.add(new Mycelium(processing, new Dna(), 500, 0)); 
+			
+		 mycelia.add(new Mycelium(processing, new Dna(), 500, 200)); 
 		
 		// fruits.add(new Fruit(processing, new Dna(), 500, 500)); 
+		// spores.add(new Spore(processing, new Dna(), 400, 400)); 
 	}
 	
 	public void initialize_ground_grid() {
@@ -79,7 +79,8 @@ public class Environment {
 	
 	/** Scan and examine main Players **/ 
 	public void spore_scan() {
-		for (int i = 0; i  < spores.size()-1	; i++) {
+		for (int i = 0; i  < spores.size(); i++) {
+			System.out.println("Inside spore loop");
 			System.out.println("spores size: " + spores.size());
 			Spore spore = spores.get(i); 
 			spore.update(this);

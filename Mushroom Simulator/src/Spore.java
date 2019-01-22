@@ -46,8 +46,7 @@ public class Spore {
 			if (x_pos > environment.width)
 				x_pos = 0; 
 			
-			x_pos += PApplet.map(processing.noise(tx), 0f, 1f, -3f, 3f);
-			
+			x_pos += PApplet.map(processing.noise(tx), 0f, 1f, -3f, 3f);			
 			y_pos += PApplet.map(processing.noise(ty), 0f, 1f, -1f, 2.5f); 
 		}
 		

@@ -46,6 +46,7 @@ public class Mycelium {
 	
 	int prev_num_cells = 0; 
 	public void update(Environment environment) {
+		System.out.println("Update() - pre_num: " + prev_num_cells + " num_cells: " + num_cells);
 		/** "Simulation of Root Forms Using Cellular Automata Model" by Nanang Winarno 
 		 * 	source: http://aip.scitation.org/doi/pdf/10.1063/1.4941186
 		*/
@@ -54,67 +55,76 @@ public class Mycelium {
 		int temp_prev_num_cells = prev_num_cells; 
 		int temp_num_cells = num_cells; 
 		
-		System.out.println("update(): t_prev_num: " + temp_prev_num_cells + " t_num_cells: " + temp_num_cells);
 		for (int i = temp_prev_num_cells; i < temp_num_cells; i++) {
-			System.out.println("\titeration : " + i);
 			// Testing update. 			
 			int current = environment.get_grid(
 					this.init_x_position/environment.w + cells[i].x_offset, 
-					this.init_y_position/environment.w + cells[i].y_offset
+					this.init_y_position/environment.w + cells[i].y_offset); 
+			
+			int adj_1 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset - 1, 
+					this.init_y_position/environment.w + cells[i].y_offset - 1); 
+			
+			int adj_2 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset, 
+					this.init_y_position/environment.w + cells[i].y_offset - 1); 
+						
+			int adj_3 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset + 1, 
+					this.init_y_position/environment.w + cells[i].y_offset - 1); 
+			
+			int adj_4 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset - 1, 
+					this.init_y_position/environment.w + cells[i].y_offset);
+			
+			int adj_5 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset + 1, 
+					this.init_y_position/environment.w + cells[i].y_offset);
+			
+			int adj_6 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset - 1,
+					this.init_y_position/environment.w + cells[i].y_offset + 1);
+			
+			int adj_7 = environment.get_grid(
+					this.init_x_position/environment.w + cells[i].x_offset, 
+					this.init_y_position/environment.w + cells[i].y_offset + 1
 			); 
-			
-			int left_2_cell = environment.get_grid(
-					this.init_x_position/environment.w + cells[i].x_offset - 2, 
-					this.init_y_position/environment.w + cells[i].y_offset
-			); 
-			
-			int right_2_cell = environment.get_grid(
-					this.init_x_position/environment.w + cells[i].x_offset + 2, 
-					this.init_y_position/environment.w + cells[i].y_offset
-			);
-			
-			int bottom_left = environment.get_grid(
+			int adj_8 = environment.get_grid(
 					this.init_x_position/environment.w + cells[i].x_offset + 1, 
 					this.init_y_position/environment.w + cells[i].y_offset + 1
-			);
+			); 
 			
-			int bottom_right = environment.get_grid(
-					this.init_x_position/environment.w - 1, 
-					this.init_y_position/environment.w + 1
-			);
+			float probability = 0.3f;
 			
+			if (Math.random() < probability && adj_1 == 0)
+				add_cell(cells[i].x_offset - 1, cells[i].y_offset - 1);
+			if (Math.random() < probability && adj_2 == 0)
+				add_cell(cells[i].x_offset - 0, cells[i].y_offset - 1);
+			if (Math.random() < probability && adj_3 == 0)
+				add_cell(cells[i].x_offset + 1, cells[i].y_offset - 1);
 			
+			if (Math.random() < probability && adj_4 == 0)
+				add_cell(cells[i].x_offset - 1, cells[i].y_offset + 0);
+			if (Math.random() < probability && adj_5 == 0)
+				add_cell(cells[i].x_offset + 1, cells[i].y_offset + 0);
 			
-			if (left_2_cell != 0) {
-				if (Math.random() < 0.6) {
-					add_cell(cells[i].x_offset - 1, cells[i].y_offset + 1); 
-				}				
-			} else {
-				if (Math.random() < 0.4) {
-					add_cell(cells[i].x_offset + 1, cells[i].y_offset + 1);
-				}
-			}
+			if (Math.random() < probability && adj_6 == 0)
+				add_cell(cells[i].x_offset - 1, cells[i].y_offset + 1);
+			if (Math.random() < probability && adj_7 == 0)
+				add_cell(cells[i].x_offset - 0, cells[i].y_offset + 1);
+			if (Math.random() < probability && adj_8 == 0)
+				add_cell(cells[i].x_offset + 1, cells[i].y_offset + 1);
 			
-			if (right_2_cell != 0) {
-				if (Math.random() < 0.6) {
-					add_cell(cells[i].x_offset + 1, cells[i].y_offset + 1); 
-				}
-			} else {
-				if (Math.random() < 0.4) {
-					add_cell(cells[i].x_offset - 1, cells[i].y_offset + 1);
-				}
-			}
-						
 		} // end for loop 
 		if (temp_num_cells != num_cells) {
 			prev_num_cells = temp_num_cells; 
 		}
 	}
 	
+	
 	public void add_cell(int x, int y) {
 		cells[num_cells] = new Cell(x, y); 
 		num_cells++; 
-		System.out.println("\tcell was just added @: ("+x+","+y+")");
 	}
 		
 	public void display_to_grid(Environment environment) {
